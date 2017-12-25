@@ -53,18 +53,25 @@ rule "Podaj dodatki"
 		parser : Parser()
 		baza : BazaWiedzy()
 	then
-		dodatek.setMonit("Jaki dodatek powinna zawierać Twoja pizza?:\n");
+		dodatek.setMonit("Jaki dodatek powinna zawierać Twoja pizza:\n");
 		dodatek.zadajPytanie();
 		parser.przetworzOdpowiedz();
 		
 		boolean inserted = false;
   		Fakt wybrane_dodatki = new Fakt("dodatek", "Wybrane dodatki");
   		
+  		boolean ignore = false;
 		for (String slowo : parser.getSlowaKluczowe()){
-			for (String uriKlasy : baza.dopasujDodatek(slowo)) { 
-				wybrane_dodatki.addOpcja(uriKlasy);
+			ignore = baza.czyBez(slowo);
+			for (String uriKlasy : baza.dopasujDodatek(slowo)) {
+				if(ignore) {
+					wybrane_dodatki.addIgnore(uriKlasy);
+				} else {
+					wybrane_dodatki.addOpcja(uriKlasy);
+				}
 		        inserted = true;
-		    } 
+		    }
+		    ignore = false;
 		}
 		
 		Set<String> listaDodatkow = new HashSet<String>(Arrays.asList(parser.getSlowaKluczowe()));
@@ -127,12 +134,12 @@ rule "Polecana pizza"
 		Fakt(nazwa == "rodzaj_ciasta") && 	
 		not Fakt(nazwa == "pizza_propozycja") &&
         $dodatek : Fakt(nazwa == "dodatek")
- 		
+
 		baza: BazaWiedzy()
 		pizza: Pizza()
 	then
 
-		Set<String> pizze = baza.wyszukajPizzePoDodatkach($dodatek.getOpcje());
+		Set<String> pizze = baza.wyszukajPizzePoDodatkach($dodatek.getOpcje(), $dodatek.getIgnore());
 		    
         if (pizze.size()>1){            		
 			for (String nazwaPizzy : pizze) {
@@ -150,7 +157,13 @@ rule "Polecana pizza"
 				dodatkiSet.add(baza.pizzaName(opcjaIRI));
 			}
 			
+			Set<String> ignoreSet = new HashSet<String>();
+			for (String opcjaIRI : $dodatek.getIgnore()) {
+				ignoreSet.add(baza.pizzaName(opcjaIRI));
+			}
+			
 			System.out.println("  Dodatki: \t" + String.join(", ", dodatkiSet));
+			System.out.println("  Bez: \t\t" + String.join(", ", ignoreSet));
 	    }
 
 end

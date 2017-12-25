@@ -47,7 +47,6 @@ public class Parser {
 		try {
 			buffer = in.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		setSlowaKluczowe(parsuj(buffer.toString()));
@@ -55,18 +54,28 @@ public class Parser {
 
 	
 	public String[] parsuj (String wypowiedz) {
-		String[] slowa = wypowiedz.replaceAll(",", "").split(" ");
+		String[] slowa = wypowiedz.replaceAll(",", "").replaceAll("bez ", "bez_").split(" ");
 		ArrayList<String> tokeny = new ArrayList<String>();
 		
 		PolishStemmer s = new PolishStemmer();
 		
 		for (String slowo : slowa){ 
+			boolean bez = false;
+			if(slowo.contains("bez_")) {
+				bez = true;
+				slowo = slowo.replaceAll("bez_", "");
+			}
 			String token = new String("");
 			if (stem(s, slowo).length>1)
 				token = stem(s, slowo)[0];
 			else
 				token = slowo.toLowerCase();
-			tokeny.add(token);
+			
+			if(bez) {
+				tokeny.add("bez " + token);
+			} else {
+				tokeny.add(token);
+			}
 		}
 		
 	    return tokeny.toArray(new String[tokeny.size()]);

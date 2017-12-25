@@ -10,6 +10,7 @@ public class Fakt {
 	private String nazwa;
 	private String wartosc;
 	private ArrayList<String> opcje = new ArrayList<String>();
+	private ArrayList<String> ignore = new ArrayList<String>();
 	
 	public Fakt(){}
 	
@@ -42,6 +43,14 @@ public class Fakt {
 
     public void addOpcja(String opcja) {
         this.opcje.add(opcja);
+    }
+    
+    public ArrayList<String> getIgnore() {
+        return this.ignore;
+    }
+
+    public void addIgnore(String opcja) {
+        this.ignore.add(opcja);
     }
 	
 }

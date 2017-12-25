@@ -2,6 +2,7 @@ package pl.poznan.put.cs.si.puttalky;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -58,6 +59,11 @@ public class BazaWiedzy {
     
     public Set<String> dopasujDodatek(String s){
 	    	Set<String> result = new HashSet<String>();
+	    	String[] text = s.split(" ");
+    		if(text.length > 1) {
+    			s = text[1];
+    		}
+    		
 	    	for (OWLClass klasa : listaDodatkow){
 	    		if (klasa.toString().toLowerCase().contains(s.toLowerCase()) && s.length()>2){
 	    			result.add(klasa.getIRI().toString());
@@ -65,6 +71,13 @@ public class BazaWiedzy {
 	    	}
 	    	
 	    	return result;
+    }
+    
+    public boolean czyBez(String slowo) {
+    		if(slowo.split(" ").length > 1)
+			return true;
+		else
+			return false;
     }
     
     public Set<String> dopasujPizze(String s){
@@ -91,7 +104,7 @@ public class BazaWiedzy {
 	    	return result;
 	}
     
-    public Set<String> wyszukajPizzePoDodatkach(ArrayList<String> iriList){
+    public Set<String> wyszukajPizzePoDodatkach(ArrayList<String> iriList, ArrayList<String> ignoreList){
 	    	Set<String> pizze = new HashSet<String>();
 	    	OWLObjectProperty maDodatek = manager.getOWLDataFactory().getOWLObjectProperty(IRI.create("http://semantic.cs.put.poznan.pl/ontologie/pizza.owl#maDodatek"));
 	    	Set<OWLClassExpression> ograniczeniaEgzystencjalne = new HashSet<OWLClassExpression>();
