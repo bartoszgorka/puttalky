@@ -18,13 +18,13 @@ _[B] oznacza wypowiedź chatbota, [U] użytkownika_
 
 ### Obsługa bez dodatku
 
-> [B] Wpisz nazwę lub typ pizzy (spacja aby pominąć) 
-> [U]  (space)
-> [B] Jaki dodatek powinna zawierać Twoja pizza:
-> [U] sos, bez mięsne, sharma
-> [B] Podaj rodzaj ciasta:
-> [U] cienkie
-> [B] Przygotujemy specjalną pizzę:
+> [B] Wpisz nazwę lub typ pizzy (spacja aby pominąć)   
+> [U]  (space)  
+> [B] Jaki dodatek powinna zawierać Twoja pizza:  
+> [U] sos, bez mięsne, sharma  
+> [B] Podaj rodzaj ciasta:  
+> [U] cienkie  
+> [B] Przygotujemy specjalną pizzę:  
 > [B]   Dodatki: 	Sos, sharma  
 > [B]   Bez: 		DodatekMięsny
 
