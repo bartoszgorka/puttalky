@@ -71,15 +71,16 @@ rule "Podaj dodatki"
 				}
 		        inserted = true;
 		    }
-		    ignore = false;
 		}
 		
 		Set<String> listaDodatkow = new HashSet<String>(Arrays.asList(parser.getSlowaKluczowe()));
+		String dodatki = String.join(", ", listaDodatkow);
 		if (!inserted && !listaDodatkow.isEmpty()) {
-			String dodatki = String.join(", ", listaDodatkow);
 			insert(new Fakt("wlasny_dodatek", dodatki));
-		} else if(inserted) {
+		} else if(inserted && !ignore) {
 			insert(wybrane_dodatki);
+		} else if(inserted && ignore) {
+			insert(new Fakt("wlasny_dodatek", dodatki));
 		}
 		update(dodatek);
 end
