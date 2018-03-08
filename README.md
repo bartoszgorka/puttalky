@@ -27,8 +27,8 @@ _[B] oznacza wypowiedź chatbota, [U] użytkownika_
 > [U] ser  
 > [B] Podaj rodzaj ciasta:  
 > [U] cienkie   
-> [B] Polecam pizzę: 	Margherita
-> [B] Polecam pizzę: 	Vesuvio
+> [B] Polecam pizzę: 	Margherita  
+> [B] Polecam pizzę: 	Vesuvio  
 > [B] Polecam pizzę: 	Pepperoni
 
 ### Pizza bez dodatku
@@ -38,9 +38,9 @@ _[B] oznacza wypowiedź chatbota, [U] użytkownika_
 > [B] Jaki dodatek powinna zawierać Twoja pizza:  
 > [U] ser, bez mięsa  
 > [B] Podaj rodzaj ciasta:  
-> [U] grube
-> [B] Przygotujemy specjalną pizzę:   
-> [B] Dodatki: 	bez mięso, ser
+> [U] grube  
+> [B] Przygotujemy specjalną pizzę:  
+> [B] Dodatki: 	bez mięso, ser  
 > [B] Ciasto: 	grube
 
 ### Własny dodatek
